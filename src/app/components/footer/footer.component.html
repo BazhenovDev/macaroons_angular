@@ -23,7 +23,7 @@
       <p class="footer__social-text">Мы в Instagram</p>
     </div>
     <div class="contacts footer__contacts">
-      <a href="tel:{{ socialData.phoneLink }}" class="contacts__number">{{ socialData.phone }}</a>
+      <a href="tel:{{ socialData.phoneLink }}" class="contacts__number">{{ socialData.phone | phoneNumber }}</a>
     </div>
   </div>
 </footer>

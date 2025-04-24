@@ -2,7 +2,7 @@
   <header class="header">
     <div class="logo header__logo">
       <a href="#">
-        <img src="../../assets/images/logo.png" alt="macaroons логотип">
+        <img src="../../../assets/images/logo.png" alt="macaroons логотип">
       </a>
     </div>
     <nav class="menu" id="menu" #menu>
@@ -36,7 +36,7 @@
       </ul>
     </nav>
     <div class="contacts contacts_hidden">
-      <a href="tel:{{ socialData.phoneLink }}" class="contacts__number">{{ socialData.phone }}</a>
+      <a href="tel:{{ socialData.phoneLink }}" class="contacts__number">{{ socialData.phone | phoneNumber }}</a>
     </div>
     <div class="burger" id="burger" (click)="showMenu(menu)">
       <img src="../assets/images/burger.png" alt="иконка бургера">

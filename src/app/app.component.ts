@@ -1,15 +1,22 @@
-import {Component} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {AdvantageType} from "./types/advantage.type";
 import {CatalogType} from "./types/catalog.type";
 import {OrderType} from "./types/order.type";
-import {SocialDataType} from "./types/social-data.type";
+import {ProductsService} from "./services/products.service";
+import {CartService} from "./services/cart.service";
 
 @Component({
   selector: 'macaroons-component',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+
+  constructor(private productsService: ProductsService,
+              public cartService: CartService,) {
+  }
+
+  public catalogItems: CatalogType[] = []
 
   public advantages: AdvantageType[] = [
     {
@@ -30,28 +37,9 @@ export class AppComponent {
     },
   ];
 
-  public catalogItems: CatalogType[] = [
-    {
-      image: '1.png',
-      title: 'Макарун с малиной',
-      price: '1,70'
-    },
-    {
-      image: '2.png',
-      title: 'Макарун с манго',
-      price: '1,70'
-    },
-    {
-      image: '3.png',
-      title: 'Макарун с ванилью',
-      price: '1,70'
-    },
-    {
-      image: '4.png',
-      title: 'Макарун с фисташками',
-      price: '1,70'
-    },
-  ];
+  ngOnInit() {
+    this.catalogItems = this.productsService.getProducts();
+  }
 
   public orderData: OrderType = {
     macaroon: '',
@@ -63,9 +51,13 @@ export class AppComponent {
     element.scrollIntoView({ behavior: "smooth" });
   }
 
-  public addToCart(item: string, element: HTMLElement): void {
+  public addToCart(item: CatalogType, element: HTMLElement): void {
     this.scrollTo(element)
-    this.orderData.macaroon = item.toUpperCase();
+    this.orderData.macaroon = item.title.toUpperCase();
+    const price: string = item.price.replace(',', '.');
+    this.cartService.priceInCart += +price.replace(',', '.');
+    this.cartService.productInCart++
+    alert(`${item.title} добавлен в корзину!`);
   }
 
   public showPresent: boolean = true;
@@ -88,7 +80,8 @@ export class AppComponent {
     this.orderData.macaroon = '';
     this.orderData.name = '';
     this.orderData.phone = '';
+    this.cartService.productInCart = 0;
+    this.cartService.priceInCart = 0;
     return;
   }
-
 }

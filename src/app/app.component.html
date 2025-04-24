@@ -7,7 +7,7 @@
       <p class="presentation__description">
         Побалуйте себя и своих близких самыми вкусными и ароматными домашними пироженками Macaroon!
       </p>
-      <a class="btn presentation__btn" (click)="scrollTo(catalog)">Выбрать макарун</a>
+      <a class="btn presentation__btn" bgButton (click)="scrollTo(catalog)">Выбрать макарун</a>
       <div class="presentation__image">
         <img class="presentation__image-img" src="../assets/images/main_bg.png" alt="Коробка макарун">
         <div class="circle-pulse"></div>
@@ -30,18 +30,8 @@
     <div class="about__image">
       <img src="../assets/images/about_bg.png" alt="Макарун" class="about__image-img">
     </div>
-    <div class="about__item" *ngFor="let advantage of advantages; let i = index;">
-      <div class="about__item-circle">
-        <span class="about__item-number">{{ i + 1 }}</span>
-      </div>
-      <h3 class="about__item-title">
-        {{ advantage.title }}
-      </h3>
-      <p class="about__item-description">
-        {{ advantage.description }}
-      </p>
-    </div>
-
+    <advantages *ngFor="let advantage of advantages; let index = index;" [advantage]="advantage"
+                [index]="index"></advantages>
   </div>
 </section>
 
@@ -51,17 +41,8 @@
       Выберите свой макарун
     </h2>
     <div class="catalog__items">
-      <div class="catalog__item" *ngFor="let item of catalogItems;">
-        <div class="catalog__item-image">
-          <img src="../assets/images/catalog/{{ item.image }}" alt="{{ item.title }}" class="catalog__item-img">
-        </div>
-        <h4 class="title catalog__item-title">{{ item.title }}</h4>
-        <div class="catalog__item-actions">
-          <div class="catalog__item-quantity">1 шт.</div>
-          <div class="catalog__item-price">{{ item.price }} руб</div>
-          <button class="btn catalog__btn" (click)="addToCart(item.title, order)">Заказать</button>
-        </div>
-      </div>
+      <products *ngFor="let product of catalogItems;" [product]="product"
+                (addToCartEvent)="addToCart($event, order)"></products>
     </div>
   </div>
 </section>
@@ -81,17 +62,24 @@
              name="order" [(ngModel)]="orderData.macaroon">
       <h3 class="order__form-title order__form-title_mb22">Заполните данные для заказа</h3>
       <input class="order__input" type="text" placeholder="Ваше имя" name="name" [(ngModel)]="orderData.name">
-      <input class="order__input" type="number" placeholder="+375 (__) ___ - __ - __" name="phone_number" [(ngModel)]="orderData.phone">
-      <button type="submit" class="btn order__btn" (click)="createOrder()">Оформить заказ</button>
+      <input class="order__input" type="number" placeholder="+375 (__) ___ - __ - __" name="phone_number"
+             [(ngModel)]="orderData.phone">
+      <button type="submit" class="btn order__btn" bgButton (click)="createOrder()">Оформить заказ</button>
     </form>
     <img src="../assets/images/order/strawberry1.png" alt="Клубничка" class="order__strawberry order__strawberry-first">
-    <img src="../assets/images/order/strawberry2.png" alt="Клубничка" class="order__strawberry order__strawberry-second">
+    <img src="../assets/images/order/strawberry2.png" alt="Клубничка"
+         class="order__strawberry order__strawberry-second">
   </div>
 </section>
 
 <div class="gift" *ngIf="showPresent">
-  <button class="gift__btn">
-    <img src="../assets/images/gift.png" alt="Подарок" class="gift-img">
+  <button class="gift__btn" bgButton>
+    <img src="../assets/images/cart.png" alt="Корзина" class="gift-img">
+    <span class="gift__btn-total">
+      {{ cartService.productInCart }}
+    </span>
   </button>
-  <p class="gift__text">Оформите заказ <span>и получите подарок!</span></p>
+  <p class="gift__text">
+    {{ cartService.priceInCart === 0 ? cartService.priceInCart : cartService.priceInCart.toFixed(2) }} руб.
+  </p>
 </div>

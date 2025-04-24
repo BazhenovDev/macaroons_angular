@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {socialData} from "../../utils/social-data";
-import {SocialDataType} from "../types/social-data.type";
+import {socialData} from "../../../utils/social-data";
+import {SocialDataType} from "../../types/social-data.type";
 
 @Component({
   selector: 'header-component',
