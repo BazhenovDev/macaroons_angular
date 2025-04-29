@@ -22,6 +22,7 @@ export class BgButtonDirective implements OnInit {
   onHover() {
     this.changeBgColor(this.backgroundButtonHover);
   }
+
   @HostListener('mouseleave')
   onLeave() {
     this.changeBgColor(this.backgroundButtonDefault);

@@ -1,4 +1,4 @@
-import {SocialDataType} from "../app/types/social-data.type";
+import {SocialDataType} from "../types/social-data.type";
 
 export const socialData: SocialDataType = {
   phone: '375293689868',

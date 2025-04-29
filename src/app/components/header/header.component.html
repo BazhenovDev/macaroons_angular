@@ -5,10 +5,10 @@
         <img src="../../../assets/images/logo.png" alt="macaroons логотип">
       </a>
     </div>
-    <nav class="menu" id="menu" #menu>
+    <nav class="menu" id="menu" [class.open]="isActiveMenu">
       <div class="menu__close">
         <svg class="menu__close-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-             viewBox="0 0 492 492" style="enable-background:new 0 0 492 492;" xml:space="preserve" (click)="closeMenu(menu)">
+             viewBox="0 0 492 492" style="enable-background:new 0 0 492 492;" xml:space="preserve" *ngIf="isActiveMenu" (click)="checkMenu()">
 						<g>
 							<g>
 							<path d="M300.188,246L484.14,62.04c5.06-5.064,7.852-11.82,7.86-19.024c0-7.208-2.792-13.972-7.86-19.028L468.02,7.872
@@ -25,20 +25,20 @@
       </div>
       <ul class="menu__items">
         <li class="menu__item">
-          <a class="menu__link" href="javascript:void(0)">Пироженки</a>
+          <a class="menu__link" href="#catalog" (click)="checkMenu()">Пироженки</a>
         </li>
         <li class="menu__item">
-          <a class="menu__link" href="javascript:void(0)">О нас</a>
+          <a class="menu__link" href="#about" (click)="checkMenu()">О нас</a>
         </li>
         <li class="menu__item">
-          <a class="menu__link" href="javascript:void(0)">Оформить заказ</a>
+          <a class="menu__link" href="#order" (click)="checkMenu()">Оформить заказ</a>
         </li>
       </ul>
     </nav>
     <div class="contacts contacts_hidden">
       <a href="tel:{{ socialData.phoneLink }}" class="contacts__number">{{ socialData.phone | phoneNumber }}</a>
     </div>
-    <div class="burger" id="burger" (click)="showMenu(menu)">
+    <div class="burger" id="burger" (click)="checkMenu()">
       <img src="../assets/images/burger.png" alt="иконка бургера">
     </div>
   </header>

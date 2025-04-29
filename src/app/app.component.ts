@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AdvantageType} from "./types/advantage.type";
 import {CatalogType} from "./types/catalog.type";
 import {OrderType} from "./types/order.type";
@@ -84,4 +84,5 @@ export class AppComponent implements OnInit {
     this.cartService.priceInCart = 0;
     return;
   }
+
 }

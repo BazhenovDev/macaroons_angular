@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {socialData} from "../../../utils/social-data";
+import {socialData} from "../../utils/social-data";
 import {SocialDataType} from "../../types/social-data.type";
 
 @Component({

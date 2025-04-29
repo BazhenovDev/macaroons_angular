@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {socialData} from "../../../utils/social-data";
+import {socialData} from "../../utils/social-data";
 import {SocialDataType} from "../../types/social-data.type";
 
 @Component({
@@ -8,15 +8,11 @@ import {SocialDataType} from "../../types/social-data.type";
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-
   public socialData: SocialDataType = socialData;
 
-  public showMenu(target: HTMLElement): void {
-    target.classList.add('open');
-  }
+  isActiveMenu: boolean = false;
 
-  public closeMenu(target: HTMLElement): void {
-    target.classList.remove('open');
+  checkMenu(): void {
+    this.isActiveMenu = !this.isActiveMenu;
   }
-
 }
